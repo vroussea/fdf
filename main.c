@@ -6,11 +6,12 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/02 18:28:19 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/04 19:02:28 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdlib.h>
 #include "fdf.h"
 
 int	my_key_func(int keycode, void *param)
@@ -22,7 +23,7 @@ int	my_key_func(int keycode, void *param)
 	if (keycode == 53)
 	{
 		ft_putendl("mdr");
-		return (0);
+		exit(0);
 	}
 	return (1);
 }
