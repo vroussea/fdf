@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:21:57 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/04 19:38:05 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/05 20:10:16 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static int	sizer_x(char *file)
 {
-	int	size_x;
-	char *line;
+	int		size_x;
+	char	*line;
 	int		fd;
 	int		ret;
 
@@ -31,7 +31,7 @@ static int	sizer_x(char *file)
 static int	sizer_y(char *file)
 {
 	int		size_y;
-	char 	*line;
+	char	*line;
 	int		fd;
 	int		ret;
 
@@ -47,41 +47,39 @@ static int	sizer_y(char *file)
 
 static int	init_map(int ***map, char *file)
 {
-	int		i;
 	int		size_x;
 	int		size_y;
 
 	size_x = sizer_x(file);
 	size_y = sizer_y(file);
-	ft_putstr("size_x : ");
-	ft_putendl(ft_itoa(size_x));
-	ft_putstr("size_y : ");
-	ft_putendl(ft_itoa(size_y));
 	if (!(*map = (int **)ft_memalloc(sizeof(int *) * (size_y + 1))))
 		return (0);
-	i = 0;
-	while (i < size_y)
-	{
-		if (!((*map)[i] = (int *)ft_memalloc(sizeof(int) * (size_x) + 1)))
-			return (0);
-		i++;
-	}
-	(*map)[i] = NULL;
+	(*map)[size_y] = NULL;
 	return (1);
 }
 
-static void	line_filler(char *line, int *mapline)
+static int	line_filler(char *line, int *mapline)
 {
 	char	**tab;
-	int		j;
+	int		i;
+	int		nb_int;
 
-	tab = ft_strsplit(line);
+	tab = ft_strsplit(line, ' ');
+	nb_int = 0;
+	while (tab[nb_int] != NULL)
+		nb_int++;
+	ft_putstr("nb_int + 1 : ");
+	ft_putendl(ft_itoa(nb_int + 1));
+	if (!(mapline = (int *)ft_memalloc(sizeof(int) * (nb_int + 1))))
+		return (0);
+	mapline[0] = nb_int;
+	i = 0;
 	while (tab[i])
 	{
-		map[i] = ft_atoi(tab[i]);
+		mapline[i + 1] = ft_atoi(tab[i]);
 		i++;
 	}
-	map[i] = NULL;
+	return (1);
 }
 
 int			file_reader(char *file, int ***map)
@@ -99,7 +97,8 @@ int			file_reader(char *file, int ***map)
 	fd = open(file, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		line_filler(line, (*map)[i]);
+		if (!(line_filler(line, (*map)[i])))
+			return (0);
 		i++;
 	}
 	close(fd);

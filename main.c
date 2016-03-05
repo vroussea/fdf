@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/04 19:02:28 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/05 20:13:22 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,28 @@ int	main(int argc, char **argv)
 	int		x;
 	int		y;
 	int		a;
+	int		i;
+	int		j;
 
 	map = NULL;
 	if (argc == 2)
 		file_reader(argv[1], &map);
+	ft_putnbr(map[0][0]);
+	i = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (j < map[i][0])
+		{
+			ft_putnbr(map[i][j]);
+			j++;
+			if (map[i][j] < 10)
+				ft_putchar(' ');
+			ft_putchar(' ');
+		}
+		ft_putchar('\n');
+		i++;
+	}
 	x = 50;
 	y = 50;
 	mlx = mlx_init();
