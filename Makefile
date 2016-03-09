@@ -6,7 +6,7 @@
 #    By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 09:55:27 by vroussea          #+#    #+#              #
-#    Updated: 2016/03/05 19:12:49 by vroussea         ###   ########.fr        #
+#    Updated: 2016/03/09 17:24:14 by vroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ $(NAME) :
 lib :
 			make -C libft/ re
 norm :
-			norminette $(SOURCES) libft.h
+			norminette $(SOURCES)
 meteo :
 			curl http://wttr.in/Paris
 clean :

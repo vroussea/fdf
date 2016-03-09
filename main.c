@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/07 22:29:21 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/09 22:04:18 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	my_key_func(int keycode, void *param)
 	int	tmp;
 
 	tmp = (int)param;
-	ft_putendl(ft_itoa(keycode));
 	if (keycode == 53)
 	{
 		ft_putendl("Programme ferme");
@@ -28,14 +27,28 @@ int	my_key_func(int keycode, void *param)
 	return (1);
 }
 
+static int	draw_image(char *memloc, int x, int y)
+{
+	x = y;
+	memloc[0] = 0x00;
+	memloc[1] = 0x00;
+	memloc[2] = 0xFF;
+	memloc[3] = 0x00;
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
 	int		**map;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*memloc;
 	int		x;
 	int		y;
-	int		a;
 	int		i;
 	int		j;
 
@@ -57,11 +70,15 @@ int	main(int argc, char **argv)
 		ft_putchar('\n');
 		i++;
 	}
-	x = 50;
-	y = 50;
+	x = 500;
+	y = 500;
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "test");
-	while (x <= 450 && y <= 450)
+	win = mlx_new_window(mlx, x, y, "test");
+	img = mlx_new_image(mlx, x, y);
+	memloc = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
+	draw_image(memloc, x, y);
+	mlx_put_image_to_window(mlx,win, img, 1, 1);
+	/*while (x <= 450 && y <= 450)
 	{
 		mlx_pixel_put(mlx, win, x, y, 0x00FFFFFF);
 		x++;
@@ -74,11 +91,9 @@ int	main(int argc, char **argv)
 		mlx_pixel_put(mlx, win, x, y, 0x00FFFFFF);
 		x++;
 		y--;
-	}
-	if ((a = mlx_key_hook(win, my_key_func, 0)) == 0)
+	}*/
+	if ((mlx_key_hook(win, my_key_func, 0)) == 0)
 		return (0);
-	ft_putstr("a : ");
-	ft_putendl(ft_itoa(a));
 	mlx_loop(mlx);
 	return (1);
 }
