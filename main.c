@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/17 17:13:06 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/18 21:03:02 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ int	my_key_func(int keycode, void *param)
 		ft_putendl("Programme ferme");
 		exit(0);
 	}
-	return (1);
-}
-
-static int	draw_image(char *memloc, int x, int y)
-{
-	x = y;
-	memloc[0] = 0x00;
-	memloc[1] = 0x00;
-	memloc[2] = 0xFF;
-	memloc[3] = 0x00;
 	return (1);
 }
 
@@ -71,8 +61,8 @@ int	main(int argc, char **argv)
 			ft_putchar('\n');
 			i++;
 		}
-		x = 2560;
-		y = 1350;
+		x = 1000;
+		y = 1000;
 		if (!(mlx = mlx_init()))
 			return (0);
 		win = mlx_new_window(mlx, x, y, "test");
@@ -80,10 +70,16 @@ int	main(int argc, char **argv)
 		memloc = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
 		ft_putstr("size_line : ");
 		ft_putendl(ft_itoa(size_line));
-		draw_image(memloc, x, y);
+		draw_line(200, 200, 400, 300, size_line, memloc);
+		draw_line(200, 200, 400, 100, size_line, memloc);
+		draw_line(200, 200, 300, 400, size_line, memloc);
+		draw_line(200, 200, 300, 1, size_line, memloc);
+		draw_line(200, 200, 100, 400, size_line, memloc);
+		draw_line(200, 200, 100, 1, size_line, memloc);
+		draw_line(200, 200, 1, 300, size_line, memloc);
+		draw_line(200, 200, 1, 100, size_line, memloc);
 		mlx_put_image_to_window(mlx,win, img, 1, 1);
-		if ((mlx_key_hook(win, my_key_func, 0)) == 0)
-			return (0);
+		mlx_key_hook(win, my_key_func, 0);
 		mlx_loop(mlx);
 	}
 	return (1);

@@ -6,11 +6,12 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:21:57 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/09 18:01:46 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/18 15:23:19 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <unistd.h>
 #include "fdf.h"
 
 static int	test_file(char *file)

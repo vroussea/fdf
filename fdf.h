@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/02 18:27:50 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/18 15:21:52 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define FDF_H
 
 #include "libft/libft.h"
-#include "libft/get_next_line.h"
 
 int		file_reader(char *file, int	***map);
+void	draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc);
 
 #endif
