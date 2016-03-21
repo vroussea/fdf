@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/18 21:03:02 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/21 11:07:38 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	my_key_func(int keycode, void *param)
 	tmp = (int)param;
 	if (keycode == 53)
 	{
-		ft_putendl("Programme ferme");
+		ft_putendl("Programme fermé");
 		exit(0);
 	}
 	return (1);
@@ -70,15 +70,23 @@ int	main(int argc, char **argv)
 		memloc = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
 		ft_putstr("size_line : ");
 		ft_putendl(ft_itoa(size_line));
+		ft_putendl("ligne 1");
 		draw_line(200, 200, 400, 300, size_line, memloc);
+		ft_putendl("ligne 2");
 		draw_line(200, 200, 400, 100, size_line, memloc);
+		ft_putendl("ligne 3");
 		draw_line(200, 200, 300, 400, size_line, memloc);
+		ft_putendl("ligne 4");
 		draw_line(200, 200, 300, 1, size_line, memloc);
+		ft_putendl("ligne 5");
 		draw_line(200, 200, 100, 400, size_line, memloc);
+		ft_putendl("ligne 6");
 		draw_line(200, 200, 100, 1, size_line, memloc);
+		ft_putendl("ligne 7");
 		draw_line(200, 200, 1, 300, size_line, memloc);
+		ft_putendl("ligne 8");
 		draw_line(200, 200, 1, 100, size_line, memloc);
-		mlx_put_image_to_window(mlx,win, img, 1, 1);
+		mlx_put_image_to_window(mlx, win, img, 1, 1);
 		mlx_key_hook(win, my_key_func, 0);
 		mlx_loop(mlx);
 	}

@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:21:57 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/18 15:23:19 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/21 10:03:58 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	test_file(char *file)
 	fd = open(file, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		 i = 0;
+		i = 0;
 		if (ret < 0 || line[i] == '\0')
 			return (0);
 		while (line[i] != '\0')
