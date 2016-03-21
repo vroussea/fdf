@@ -6,7 +6,7 @@
 #    By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 09:55:27 by vroussea          #+#    #+#              #
-#    Updated: 2016/03/18 15:02:19 by vroussea         ###   ########.fr        #
+#    Updated: 2016/03/21 10:10:25 by vroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ SOURCES =	main.c file_reader.c image_draw.c
 OBJS =		$(SOURCES:.c=.o)
 
 all :		$(NAME)
+fonly :
+			$(CC) $(CFLAGS) -c $(SOURCES)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(MLX)
 $(NAME) :
 			$(MKINC)
 			$(CC) $(CFLAGS) -c $(SOURCES)
