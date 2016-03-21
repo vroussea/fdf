@@ -6,12 +6,13 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 11:41:32 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:48:14 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "fdf.h"
 
 int	my_key_func(int keycode, void *param)
@@ -69,14 +70,18 @@ int	main(int argc, char **argv)
 		img = mlx_new_image(mlx, x, y);
 		memloc = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
 
-		draw_line(200, 200, 400, 300, size_line, memloc);
-		draw_line(200, 200, 400, 100, size_line, memloc);
-		draw_line(200, 200, 300, 400, size_line, memloc);
-		draw_line(200, 200, 300, 1, size_line, memloc);
-		draw_line(200, 200, 100, 400, size_line, memloc);
-		draw_line(200, 200, 100, 1, size_line, memloc);
-		draw_line(200, 200, 1, 300, size_line, memloc);
-		draw_line(200, 200, 1, 100, size_line, memloc);
+		draw_line(300, 300, 500, 400, size_line, memloc);
+		draw_line(300, 300, 500, 200, size_line, memloc);
+		draw_line(300, 300, 400, 500, size_line, memloc);
+		draw_line(300, 300, 400, 100, size_line, memloc);
+		draw_line(300, 300, 200, 500, size_line, memloc);
+		draw_line(300, 300, 200, 100, size_line, memloc);
+		draw_line(300, 300, 100, 400, size_line, memloc);
+		draw_line(300, 300, 100, 200, size_line, memloc);
+		draw_line(300, 300, 300, 500, size_line, memloc);
+		draw_line(300, 300, 300, 100, size_line, memloc);
+		draw_line(300, 300, 100, 300, size_line, memloc);
+		draw_line(300, 300, 500, 300, size_line, memloc);
 		mlx_put_image_to_window(mlx, win, img, 1, 1);
 		mlx_key_hook(win, my_key_func, 0);
 		mlx_loop(mlx);

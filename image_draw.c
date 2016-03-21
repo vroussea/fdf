@@ -6,12 +6,11 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 13:44:47 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/21 20:01:55 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 /*
 ** col : 2 = red, 1 = green, 0 = blue
@@ -28,15 +27,12 @@ void		draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc)
 	int		x;
 	int		y;
 
-	if (x1 > x2)
-	{
-		ft_intswap(&x1, &x2);
-		ft_intswap(&y1, &y2);
-	}
+	(x1 > x2 ? ft_intswap(&y1, &y2) : (void)0);
+	(x1 > x2 ? ft_intswap(&x1, &x2) : (void)0);
 	x = 0;
 	y = 0;
-	a = (double)(y2 - y1) / (x2 - x1);
-	if (a < 1)
+	a = (double)(y2 - y1) / (double)(x2 - x1);
+	if (a < 1 && a > -1)
 		while (x1 + x <= x2)
 		{
 			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
@@ -46,9 +42,10 @@ void		draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc)
 	else
 		while (y1 + y != y2)
 		{
-			color_pixel(x1 + x, y1 + (y1 < y2 ? y : -y), memloc, size_line, 2);
-			y++;
+			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
+			y = (y1 < y2 ? y + 1 : y - 1);
 			x = y / a;
+			if (y1 + y == y2)
+				color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 		}
-	color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 }

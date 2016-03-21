@@ -1,25 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   3D_converter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 17:30:05 by vroussea         ###   ########.fr       */
+/*   Created: 2016/03/21 17:00:58 by vroussea          #+#    #+#             */
+/*   Updated: 2016/03/21 17:27:50 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-#define FDF_H
+#include "fdf.h"
 
-#include "libft/libft.h"
+static int	nb_pts(int	**map)
+{
+	int	i;
+	int	j;
 
-#define CST 0.5
+	i = 0;
+	j = 0;
+	while (map[i] != NULL)
+	{
+		j = j + map[i][0];
+		i++; 
+	}
+	return (j);
+}
 
-int		file_reader(char *file, int	***map);
-void	draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc);
-int		**para_convert(int **map);
-int		**iso_convert(int **map);
+void		para_convert(int **map)
+{
+	int	**tab;
+	int	pts;
 
-#endif
+	pts = nb_pts(map);
+
+}
+
+/*void		iso_convert(int **map)
+{
+	int	**tab;
+
+
+}*/
