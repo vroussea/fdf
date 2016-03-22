@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 20:01:55 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/22 15:35:09 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc)
 	y = 0;
 	a = (double)(y2 - y1) / (double)(x2 - x1);
 	if (a < 1 && a > -1)
-		while (x1 + x <= x2)
+		while (x1 + x < x2)
 		{
 			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 			x++;
@@ -45,7 +45,6 @@ void		draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc)
 			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 			y = (y1 < y2 ? y + 1 : y - 1);
 			x = y / a;
-			if (y1 + y == y2)
-				color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 		}
+	color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
 }
