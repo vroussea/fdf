@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:00:58 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 17:27:50 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/03/24 19:41:13 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ static int	nb_pts(int	**map)
 
 void		para_convert(int **map)
 {
-	int	**tab;
 	int	pts;
 
 	pts = nb_pts(map);
-
+	
 }
 
 /*void		iso_convert(int **map)
