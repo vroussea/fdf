@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:21:57 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 10:03:58 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/01 22:32:11 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ static int	test_file(char *file)
 	return (1);
 }
 
+static int	test_size(int ***map)
+{
+	int	i;
+	int	size;
+
+	i = 1;
+	size = *map[0][0];
+	while ((*map)[i])
+	{
+		if (size != (*map)[i][0])
+		{
+			ft_tabdel((void ***)&(*map));
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 static int	init_map(int ***map, char *file)
 {
 	int		size_y;
@@ -68,12 +87,16 @@ static int	*line_filler(char *line, int *mapline)
 	int		i;
 	int		nb_int;
 
-	tab = ft_strsplit(line, ' ');
+	if (!(tab = ft_strsplit(line, ' ')))
+		return (NULL);
 	nb_int = 0;
 	while (tab[nb_int] != NULL)
 		nb_int++;
 	if (!(mapline = (int *)ft_memalloc(sizeof(int) * (nb_int + 1))))
+	{
+		ft_tabdel((void ***)&tab);
 		return (NULL);
+	}
 	mapline[0] = nb_int;
 	i = 0;
 	while (tab[i])
@@ -81,6 +104,7 @@ static int	*line_filler(char *line, int *mapline)
 		mapline[i + 1] = ft_atoi(tab[i]);
 		i++;
 	}
+	ft_tabdel((void ***)&tab);
 	return (mapline);
 }
 
@@ -104,6 +128,8 @@ int			file_reader(char *file, int ***map)
 		ft_strdel(&line);
 		i++;
 	}
+	if (!test_size(map))
+		return (0);
 	close(fd);
 	return ((ret < 0) ? 0 : 1);
 }

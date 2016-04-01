@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/21 18:48:14 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/01 22:31:25 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
 	int		**map;
-	int		bits_per_pixel;
-	int		size_line;
+	t_img   img;
+	t_pt	pt1;
+	t_pt	pt2;
+	int		b_per_p;
 	int		endian;
-	char	*memloc;
 	int		x;
 	int		y;
 	int		i;
@@ -46,7 +46,11 @@ int	main(int argc, char **argv)
 	map = NULL;
 	if (argc == 2)
 	{
-		file_reader(argv[1], &map);
+		if (!file_reader(argv[1], &map))
+		{
+			ft_putendl("Error with map file or malloc !");
+			return (0);
+		}
 		i = 0;
 		while (map[i] != NULL)
 		{
@@ -66,23 +70,49 @@ int	main(int argc, char **argv)
 		y = 1000;
 		if (!(mlx = mlx_init()))
 			return (0);
-		win = mlx_new_window(mlx, x, y, "test");
-		img = mlx_new_image(mlx, x, y);
-		memloc = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
+		win = mlx_new_window(mlx, SIZE_X, SIZE_Y, "test");
+		img.ptr = mlx_new_image(mlx, SIZE_X, SIZE_Y);
+		img.meml = mlx_get_data_addr(img.ptr, &b_per_p, &(img.sizel), &endian);
 
-		draw_line(300, 300, 500, 400, size_line, memloc);
-		draw_line(300, 300, 500, 200, size_line, memloc);
-		draw_line(300, 300, 400, 500, size_line, memloc);
-		draw_line(300, 300, 400, 100, size_line, memloc);
-		draw_line(300, 300, 200, 500, size_line, memloc);
-		draw_line(300, 300, 200, 100, size_line, memloc);
-		draw_line(300, 300, 100, 400, size_line, memloc);
-		draw_line(300, 300, 100, 200, size_line, memloc);
-		draw_line(300, 300, 300, 500, size_line, memloc);
-		draw_line(300, 300, 300, 100, size_line, memloc);
-		draw_line(300, 300, 100, 300, size_line, memloc);
-		draw_line(300, 300, 500, 300, size_line, memloc);
-		mlx_put_image_to_window(mlx, win, img, 1, 1);
+		pt1.x = 300;
+		pt1.y = 300;
+		pt2.x = 500;
+		pt2.y = 300;
+		draw_line(pt1, pt2, img);
+		pt2.x = 500;
+		pt2.y = 200;
+		draw_line(pt1, pt2, img);
+		pt2.x = 400;
+		pt2.y = 500;
+		draw_line(pt1, pt2, img);
+		pt2.x = 400;
+		pt2.y = 100;
+		draw_line(pt1, pt2, img);
+		pt2.x = 200;
+		pt2.y = 500;
+		draw_line(pt1, pt2, img);
+		pt2.x = 200;
+		pt2.y = 100;
+		draw_line(pt1, pt2, img);
+		pt2.x = 100;
+		pt2.y = 400;
+		draw_line(pt1, pt2, img);
+		pt2.x = 100;
+		pt2.y = 200;
+		draw_line(pt1, pt2, img);
+		pt2.x = 300;
+		pt2.y = 500;
+		draw_line(pt1, pt2, img);
+		pt2.x = 300;
+		pt2.y = 100;
+		draw_line(pt1, pt2, img);
+		pt2.x = 100;
+		pt2.y = 300;
+		draw_line(pt1, pt2, img);
+		pt2.x = 500;
+		pt2.y = 400;
+		draw_line(pt1, pt2, img);
+		mlx_put_image_to_window(mlx, win, img.ptr, 1, 1);
 		mlx_key_hook(win, my_key_func, 0);
 		mlx_loop(mlx);
 	}

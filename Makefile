@@ -6,7 +6,7 @@
 #    By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 09:55:27 by vroussea          #+#    #+#              #
-#    Updated: 2016/03/21 17:30:24 by vroussea         ###   ########.fr        #
+#    Updated: 2016/04/01 17:48:16 by vroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(NAME) :
 			$(CC) $(CFLAGS) -c $(SOURCES)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(MLX)
 norm :
-			norminette $(SOURCES)
+			norminette $(SOURCES) *.h
 meteo :
 			curl http://wttr.in/Paris
 clean :

@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/03/22 15:35:09 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/01 19:08:52 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@
 ** col : 2 = red, 1 = green, 0 = blue
 */
 
-static void	color_pixel(int x, int y, char *memloc, int size_line, int col)
+static void	color_pixel(int x, int y, t_img img, int col)
 {
-	memloc[((x - 1) * 4 + (y - 1) * size_line + col)] = 0xFF;
+	img.meml[((x - 1) * 4 + (y - 1) * img.sizel + col)] = 0xFF;
 }
 
-void		draw_line(int x1, int y1, int x2, int y2, int size_line, char *memloc)
+void		draw_line(t_pt pt1, t_pt pt2, t_img img)
 {
 	double	a;
 	int		x;
 	int		y;
 
-	(x1 > x2 ? ft_intswap(&y1, &y2) : (void)0);
-	(x1 > x2 ? ft_intswap(&x1, &x2) : (void)0);
+	(pt1.x > pt2.x ? ft_intswap(&pt1.y, &pt2.y) : (void)0);
+	(pt1.x > pt2.x ? ft_intswap(&pt1.x, &pt2.x) : (void)0);
 	x = 0;
 	y = 0;
-	a = (double)(y2 - y1) / (double)(x2 - x1);
+	a = (double)(pt2.y - pt1.y) / (double)(pt2.x - pt1.x);
 	if (a < 1 && a > -1)
-		while (x1 + x < x2)
+		while (pt1.x + x < pt2.x)
 		{
-			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
+			color_pixel(pt1.x + x, pt1.y + y, img, 2);
 			x++;
 			y = x * a;
 		}
 	else
-		while (y1 + y != y2)
+		while (pt1.y + y != pt2.y)
 		{
-			color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
-			y = (y1 < y2 ? y + 1 : y - 1);
+			color_pixel(pt1.x + x, pt1.y + y, img, 2);
+			y = (pt1.y < pt2.y ? y + 1 : y - 1);
 			x = y / a;
 		}
-	color_pixel(x1 + x, y1 + y, memloc, size_line, 2);
+	color_pixel(pt1.x + x, pt1.y + y, img, 2);
 }
