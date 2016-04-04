@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/04 16:46:20 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/04 21:26:54 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft/libft.h"
 
-# define SIZE_X 1000
-# define SIZE_Y 1000
+# define SIZE_X 1800
+# define SIZE_Y 1400
 # define CST 0.75
 
 typedef struct	s_img

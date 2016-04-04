@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:21:57 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/01 22:32:11 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/04 20:50:07 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static int	test_file(char *file)
 			return (0);
 		while (line[i] != '\0')
 		{
-			if (!ft_isdigit(line[i]) && line[i] != ' ')
+			if (!ft_isdigit(line[i]) && line[i] != ' ' && line[i] != '-')
+				return (0);
+			if (line[i] == '-' && line[i + 1] == '-')
 				return (0);
 			i++;
 		}
