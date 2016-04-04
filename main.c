@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/01 22:31:25 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/04 15:54:08 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ int	main(int argc, char **argv)
 		img.ptr = mlx_new_image(mlx, SIZE_X, SIZE_Y);
 		img.meml = mlx_get_data_addr(img.ptr, &b_per_p, &(img.sizel), &endian);
 
+		para_caller(map, img);
 		pt1.x = 300;
 		pt1.y = 300;
 		pt2.x = 500;
 		pt2.y = 300;
-		draw_line(pt1, pt2, img);
+		/*draw_line(pt1, pt2, img);
 		pt2.x = 500;
 		pt2.y = 200;
 		draw_line(pt1, pt2, img);
@@ -111,7 +112,7 @@ int	main(int argc, char **argv)
 		draw_line(pt1, pt2, img);
 		pt2.x = 500;
 		pt2.y = 400;
-		draw_line(pt1, pt2, img);
+		draw_line(pt1, pt2, img);*/
 		mlx_put_image_to_window(mlx, win, img.ptr, 1, 1);
 		mlx_key_hook(win, my_key_func, 0);
 		mlx_loop(mlx);
