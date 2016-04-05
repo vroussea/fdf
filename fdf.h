@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/05 19:57:26 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/05 22:29:41 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typedef struct	s_env
 
 typedef struct	s_img
 {
-	int		sizel;
-	int		sbpx;
-	int		sbpy;
-	char	*meml;
-	void	*ptr;
+	int			sizel;
+	double		sbpx;
+	double		sbpy;
+	char		*meml;
+	void		*ptr;
 	t_env	*env;
 }				t_img;
 
@@ -45,6 +45,7 @@ typedef struct	s_pt
 
 int				file_reader(char *file, int	***map);
 void			draw_line(t_pt pt1, t_pt pt2, t_img *img);
-void			para_caller(int **map, t_img *img);
+int				key_hook(int keycode, t_img *img);
+int				put_image(int **map, t_img *img);
 
 #endif
