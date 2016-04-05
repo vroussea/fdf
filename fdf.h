@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/05 19:02:03 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/05 19:57:26 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ typedef struct	s_env
 	int 	szy;
 	void	*mlx;
 	void	*win;
+	int		**map;
 }				t_env;
 
 typedef struct	s_img
 {
 	int		sizel;
+	int		sbpx;
+	int		sbpy;
 	char	*meml;
 	void	*ptr;
 	t_env	*env;
