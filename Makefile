@@ -6,7 +6,7 @@
 #    By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 09:55:27 by vroussea          #+#    #+#              #
-#    Updated: 2016/04/04 15:55:12 by vroussea         ###   ########.fr        #
+#    Updated: 2016/04/05 18:01:10 by vroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MKINC =		make -C libft/
 MLX =		-lmlx -framework OpenGL -framework AppKit
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
-SOURCES =	main.c file_reader.c image_draw.c 3D_converter.c
+SOURCES =	main.c file_reader.c image_draw.c converter.c
 OBJS =		$(SOURCES:.c=.o)
 
 all :		$(NAME)
