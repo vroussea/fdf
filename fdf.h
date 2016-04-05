@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/04 21:26:54 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/05 19:02:03 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 
 # include "libft/libft.h"
 
-# define SIZE_X 1800
-# define SIZE_Y 1400
 # define CST 0.75
+
+typedef struct	s_env
+{
+	int		szx;
+	int 	szy;
+	void	*mlx;
+	void	*win;
+}				t_env;
 
 typedef struct	s_img
 {
 	int		sizel;
 	char	*meml;
 	void	*ptr;
+	t_env	*env;
 }				t_img;
 
 typedef struct	s_pt
@@ -34,7 +41,7 @@ typedef struct	s_pt
 }				t_pt;
 
 int				file_reader(char *file, int	***map);
-void			draw_line(t_pt pt1, t_pt pt2, t_img file);
-void			para_caller(int **map, t_img img);
+void			draw_line(t_pt pt1, t_pt pt2, t_img *img);
+void			para_caller(int **map, t_img *img);
 
 #endif

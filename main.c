@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/04 15:54:08 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/05 19:04:36 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "fdf.h"
 
-int	my_key_func(int keycode, void *param)
+static int		my_key_func(int keycode, void *param)
 {
 	int	tmp;
 
@@ -28,20 +28,57 @@ int	my_key_func(int keycode, void *param)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+/*
+** static int		nb_pts(int **map)
+** {
+**	int	i;
+**	int	j;
+**
+**	i = 0;
+**	j = 0;
+**	while (map[i] != NULL)
+**	{
+**		j = j + map[i][0];
+**		i++;
+**	}
+**	return (j);
+** }
+*/
+
+static t_img	*img_init(t_env *env)
 {
-	void	*mlx;
-	void	*win;
+	int		bpp;
+	int		edan;
+	t_img	*img;
+
+	if (!(img = (t_img *)ft_memalloc(sizeof(t_img))))
+		return (NULL);
+	if (!(img->ptr = mlx_new_image(env->mlx, env->szx, env->szy)))
+		return (NULL);
+	if (!(img->meml = mlx_get_data_addr(img->ptr, &bpp, &(img->sizel), &edan)))
+		return (NULL);
+	img->env = env;
+	return (img);
+}
+
+static t_env	*env-Init()
+{
+	t_env	*env;
+
+	if (!(env->mlx = mlx_init()))
+		return (0);
+	env->szx = 2560;
+	env->szy = 1310;
+	if (!(env->win = mlx_new_window(env->mlx, env->szx, env->szy, "test")))
+		return (0);
+	return (env);
+}
+
+int				main(int argc, char **argv)
+{
+	t_env	*env;
 	int		**map;
-	t_img   img;
-	t_pt	pt1;
-	t_pt	pt2;
-	int		b_per_p;
-	int		endian;
-	int		x;
-	int		y;
-	int		i;
-	int		j;
+	t_img	*img;
 
 	map = NULL;
 	if (argc == 2)
@@ -51,71 +88,12 @@ int	main(int argc, char **argv)
 			ft_putendl("Error with map file or malloc !");
 			return (0);
 		}
-		i = 0;
-		while (map[i] != NULL)
-		{
-			j = 0;
-			while (j < map[i][0] + 1)
-			{
-				ft_putnbr(map[i][j]);
-				if (map[i][j] < 10)
-					ft_putchar(' ');
-				j++;
-				ft_putchar(' ');
-			}
-			ft_putchar('\n');
-			i++;
-		}
-		x = 1000;
-		y = 1000;
-		if (!(mlx = mlx_init()))
+		if (!(img = img_init(env)))
 			return (0);
-		win = mlx_new_window(mlx, SIZE_X, SIZE_Y, "test");
-		img.ptr = mlx_new_image(mlx, SIZE_X, SIZE_Y);
-		img.meml = mlx_get_data_addr(img.ptr, &b_per_p, &(img.sizel), &endian);
-
 		para_caller(map, img);
-		pt1.x = 300;
-		pt1.y = 300;
-		pt2.x = 500;
-		pt2.y = 300;
-		/*draw_line(pt1, pt2, img);
-		pt2.x = 500;
-		pt2.y = 200;
-		draw_line(pt1, pt2, img);
-		pt2.x = 400;
-		pt2.y = 500;
-		draw_line(pt1, pt2, img);
-		pt2.x = 400;
-		pt2.y = 100;
-		draw_line(pt1, pt2, img);
-		pt2.x = 200;
-		pt2.y = 500;
-		draw_line(pt1, pt2, img);
-		pt2.x = 200;
-		pt2.y = 100;
-		draw_line(pt1, pt2, img);
-		pt2.x = 100;
-		pt2.y = 400;
-		draw_line(pt1, pt2, img);
-		pt2.x = 100;
-		pt2.y = 200;
-		draw_line(pt1, pt2, img);
-		pt2.x = 300;
-		pt2.y = 500;
-		draw_line(pt1, pt2, img);
-		pt2.x = 300;
-		pt2.y = 100;
-		draw_line(pt1, pt2, img);
-		pt2.x = 100;
-		pt2.y = 300;
-		draw_line(pt1, pt2, img);
-		pt2.x = 500;
-		pt2.y = 400;
-		draw_line(pt1, pt2, img);*/
-		mlx_put_image_to_window(mlx, win, img.ptr, 1, 1);
-		mlx_key_hook(win, my_key_func, 0);
-		mlx_loop(mlx);
+		mlx_put_image_to_window(env->mlx, env->win, img->ptr, 1, 1);
+		mlx_key_hook(env->win, my_key_func, 0);
+		mlx_loop(env->mlx);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/04 21:24:02 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/05 18:13:28 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 ** col : 2 = red, 1 = green, 0 = blue
 */
 
-static void	color_pixel(int x, int y, t_img img, int col)
+static void	color_pixel(int x, int y, t_img *img, int col)
 {
-	if (x > 0 && x < SIZE_X && y > 0 && y < SIZE_Y)
-		img.meml[((x - 1) * 4 + (y - 1) * img.sizel + col)] = 0xFF;
+	if (x > 0 && x < img->sizel && x < SIZE_X && y > 0 && y < SIZE_Y)
+		img->meml[((x - 1) * 4 + (y - 1) * img->sizel + col)] = 0xFF;
 }
 
-void		draw_line(t_pt pt1, t_pt pt2, t_img img)
+void		draw_line(t_pt pt1, t_pt pt2, t_img *img)
 {
 	double	a;
 	int		x;
