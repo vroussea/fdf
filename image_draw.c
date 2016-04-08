@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/05 19:19:30 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/08 18:28:43 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	color_pixel(int x, int y, t_img *img, int col)
 		img->meml[((x - 1) * 4 + (y - 1) * img->sizel + col)] = 0xFF;
 }
 
-void		draw_line(t_pt pt1, t_pt pt2, t_img *img)
+void		line(t_pt pt1, t_pt pt2, t_img *img)
 {
 	double	a;
 	int		x;

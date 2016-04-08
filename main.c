@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/05 22:16:24 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/08 17:56:12 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_img	*img_init(t_env *env)
 
 	if (!(img = (t_img *)ft_memalloc(sizeof(t_img))))
 		return (NULL);
-	img->sbpx = 2;
+	img->sbpx = 1;
 	img->sbpy = 1;
 	img->env = env;
 	return (img);
