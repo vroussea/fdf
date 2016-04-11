@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/08 17:56:12 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/11 19:10:18 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,52 +32,32 @@
 ** }
 */
 
-static t_img	*img_init(t_env *env)
-{
-	t_img	*img;
-
-	if (!(img = (t_img *)ft_memalloc(sizeof(t_img))))
-		return (NULL);
-	img->sbpx = 1;
-	img->sbpy = 1;
-	img->env = env;
-	return (img);
-}
-
-static t_env	*env_init()
-{
-	t_env	*env;
-
-	if (!(env = (t_env *)ft_memalloc(sizeof(t_env))))
-		return (0);
-	if (!(env->mlx = mlx_init()))
-		return (0);
-	env->szx = 2560;              ////////////////// erase when menu is on
-	env->szy = 1310;                   /////////////////
-	if (!(env->win = mlx_new_window(env->mlx, env->szx, env->szy, "test")))
-		return (0);
-	return (env);
-}
-
 int				main(int argc, char **argv)
 {
-	t_env	*env;
-	t_img	*img;
+	t_env	env;
 
 	if (argc == 2)
 	{
-		if (!(env = env_init()))
+		env.px = 1;
+		env.py = 1;
+		env.sx = 2560;              ////////////////// erase when menu is on
+		env.sy = 1310;                   /////////////////
+		env.dx = 100;
+		env.dy = 100;
+		env.ox = 1;
+		env.oy = 1;
+		if (!(env.mlx = mlx_init()))
 			return (0);
-		env->map = NULL;
-		if (!file_reader(argv[1], &(env->map)))
+		if (!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")))
+			return (0);
+		env.map = NULL;
+		if (!file_reader(argv[1], &(env.map)))
 		{
 			ft_putendl("Error with map file or malloc !");
 			return (0);
 		}
-		if (!(img = img_init(env)))
-			return (0);
-		mlx_key_hook(env->win, key_hook, img);
-		mlx_loop(env->mlx);
+		mlx_key_hook(env.win, key_hook, &env);
+		mlx_loop(env.mlx);
 	}
 	return (1);
 }

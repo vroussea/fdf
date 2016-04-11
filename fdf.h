@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/08 18:28:56 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/11 18:50:31 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,28 @@
 
 # define CST 0.75
 
+/*
+** px/py space between 2 points
+** sx/sy screen size
+*/
+
 typedef struct	s_env
 {
-	int		szx;
-	int		szy;
+	int		sx;
+	int		sy;
 	void	*mlx;
 	void	*win;
 	int		**map;
+	int		sizel;
+	double	ox;
+	double	oy;
+	double	px;
+	double	py;
+	double	dx;
+	double	dy;
+	char	*meml;
+	void	*img;
 }				t_env;
-
-typedef struct	s_img
-{
-	int			sizel;
-	double		sbpx;
-	double		sbpy;
-	char		*meml;
-	void		*ptr;
-	t_env		*env;
-}				t_img;
 
 typedef struct	s_pt
 {
@@ -44,8 +48,8 @@ typedef struct	s_pt
 }				t_pt;
 
 int				file_reader(char *file, int	***map);
-void			line(t_pt pt1, t_pt pt2, t_img *img);
-int				key_hook(int keycode, t_img *img);
-int				put_image(int **map, t_img *img);
+void			line(t_pt pt1, t_pt pt2, t_env env);
+int				key_hook(int keycode, t_env *env);
+int				put_image(int **map, t_env env);
 
 #endif

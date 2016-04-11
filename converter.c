@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 18:01:29 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/08 18:27:35 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/11 19:40:17 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 #include <mlx.h>
 #include <stdlib.h>
 
-static t_pt	para(int x, int y, int z, t_img *img)
+static t_pt	para(int x, int y, int z, t_env env)
 {
 	t_pt	pt;
 
-	pt.y = y + y * img->sbpy + 100 - CST * z / 2 * 0.4 - 0.1 * x;
-	pt.x = x + x * img->sbpx + 100 - CST * z * 0.4;
+
+	pt.y = y * env.py * env.oy + env.dy - CST * z / 2 * 0.4 - 0.1 * env.px * x;
+	pt.x = x * env.px * env.ox + env.dx - CST * z * 0.4;
 	return (pt);
 }
 
-static int	para_caller(int **map, t_img *img)
+static int	para_caller(int **map, t_env env)
 {
 	t_pt	pt1;
 	int		i;
@@ -35,11 +36,11 @@ static int	para_caller(int **map, t_img *img)
 		j = 1;
 		while (j <= map[i][0])
 		{
-			pt1 = para(j - 1, i, map[i][j], img);
+			pt1 = para(j - 1, i, map[i][j], env);
 			if (j + 1 <= map[i][0])
-				line(pt1, para(j, i, map[i][j + 1], img), img);
+				line(pt1, para(j, i, map[i][j + 1], env), env);
 			if (map[i + 1])
-				line(pt1, para(j - 1, i + 1, map[i + 1][j], img), img);
+				line(pt1, para(j - 1, i + 1, map[i + 1][j], env), env);
 			j++;
 		}
 		i++;
@@ -47,18 +48,16 @@ static int	para_caller(int **map, t_img *img)
 	return (1);
 }
 
-int			put_image(int **map, t_img *img)
+int			put_image(int **map, t_env env)
 {
 	int		bpp;
 	int		edan;
-	t_env	*env;
 
-	env = img->env;
-	if (!(img->ptr = mlx_new_image(env->mlx, env->szx, env->szy)) ||
-		!(img->meml = mlx_get_data_addr(img->ptr, &bpp, &(img->sizel), &edan))
-		|| !(para_caller(map, img)))
+	if (!(env.img = mlx_new_image(env.mlx, env.sx, env.sy)) ||
+		!(env.meml = mlx_get_data_addr(env.img, &bpp, &(env.sizel), &edan))
+		|| !(para_caller(map, env)))
 		return (0);
-	mlx_put_image_to_window(env->mlx, env->win, img->ptr, 1, 1);
-	mlx_destroy_image(env->mlx, img->ptr);
+	mlx_put_image_to_window(env.mlx, env.win, env.img, 1, 1);
+	mlx_destroy_image(env.mlx, env.img);
 	return (1);
 }

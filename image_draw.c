@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 16:05:09 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/08 18:28:43 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/11 19:56:28 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,35 @@
 ** col : 2 = red, 1 = green, 0 = blue
 */
 
-static void	color_pixel(int x, int y, t_img *img, int col)
+static void	color_pixel(int x, int y, t_env env, int col)
 {
-	if (x > 0 && x < img->sizel && x < img->env->szx
-		&& y > 0 && y < img->env->szy)
-		img->meml[((x - 1) * 4 + (y - 1) * img->sizel + col)] = 0xFF;
+	if (x > 0 && x < env.sizel && x < env.sx && y > 0 && y < env.sy)
+		env.meml[((x - 1) * 4 + (y - 1) * env.sizel + col)] = 0xFF;
 }
 
-void		line(t_pt pt1, t_pt pt2, t_img *img)
+void		line(t_pt pt1, t_pt pt2, t_env env)
 {
 	double	a;
-	int		x;
-	int		y;
+	t_pt	pt;
 
 	(pt1.x > pt2.x ? ft_intswap(&pt1.y, &pt2.y) : (void)0);
 	(pt1.x > pt2.x ? ft_intswap(&pt1.x, &pt2.x) : (void)0);
-	x = 0;
-	y = 0;
+	pt.x = 0;
+	pt.y = 0;
 	a = (double)(pt2.y - pt1.y) / (double)(pt2.x - pt1.x);
 	if (a < 1 && a > -1)
-		while (pt1.x + x < pt2.x)
+		while (pt1.x + pt.x < pt2.x)
 		{
-			color_pixel(pt1.x + x, pt1.y + y, img, 2);
-			x++;
-			y = x * a;
+			color_pixel(pt1.x + pt.x, pt1.y + pt.y, env, 2);
+			pt.x++;
+			pt.y = pt.x * a;
 		}
 	else
-		while (pt1.y + y != pt2.y)
+		while (pt1.y + pt.y != pt2.y)
 		{
-			color_pixel(pt1.x + x, pt1.y + y, img, 2);
-			y = (pt1.y < pt2.y ? y + 1 : y - 1);
-			x = y / a;
+			color_pixel(pt1.x + pt.x, pt1.y + pt.y, env, 2);
+			pt.y = (pt1.y < pt2.y ? pt.y + 1 : pt.y - 1);
+			pt.x = pt.y / a;
 		}
-	color_pixel(pt1.x + x, pt1.y + y, img, 2);
+	color_pixel(pt1.x + pt.x, pt1.y + pt.y, env, 2);
 }
