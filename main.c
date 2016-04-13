@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/11 19:10:18 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/13 21:03:13 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,30 @@ int				main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		env.px = 1;
-		env.py = 1;
 		env.sx = 2560;              ////////////////// erase when menu is on
-		env.sy = 1310;                   /////////////////
+		env.sy = 1310; /////////////////
+		env.mtx[0][3] = 100;
+		env.mtx[1][3] = 100;
+		env.mtx[2][3] = 100;
+		env.mtx[3][3] = 1;
+		env.mtx[0][0] = 1;
+		env.mtx[0][1] = 0;
+		env.mtx[0][2] = 5;
+		env.mtx[1][0] = 1;
+		env.mtx[1][1] = 0;
+		env.mtx[1][2] = 5;
+		env.mtx[2][0] = 1;
+		env.mtx[2][1] = 0;
+		env.mtx[2][2] = 1;
+		env.mtx[3][0] = 0;
+		env.mtx[3][1] = 0;
+		env.mtx[3][2] = 0;
+		/*env.px = 1;
+		env.py = 1;
 		env.dx = 100;
 		env.dy = 100;
 		env.ox = 1;
-		env.oy = 1;
+		env.oy = 1;*/
 		if (!(env.mlx = mlx_init()))
 			return (0);
 		if (!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")))

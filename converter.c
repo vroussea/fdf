@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 18:01:29 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/11 19:40:17 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/13 20:37:51 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ static t_pt	para(int x, int y, int z, t_env env)
 {
 	t_pt	pt;
 
-
-	pt.y = y * env.py * env.oy + env.dy - CST * z / 2 * 0.4 - 0.1 * env.px * x;
-	pt.x = x * env.px * env.ox + env.dx - CST * z * 0.4;
+	pt.x = env.mtx[0][0] * x;
+	pt.x += env.mtx[0][1] * y;
+	pt.x += env.mtx[0][2] * z;
+	pt.x += env.mtx[0][3];
+	pt.y = env.mtx[1][0] * x;
+	pt.y += env.mtx[1][1] * y;
+	pt.y += env.mtx[1][2] * z;
+	pt.y += env.mtx[1][3];
+//	pt.y = y * env.py * env.oy + env.dy - CST * z / 2 * 0.4 - 0.1 * env.px * x;
+//	pt.x = x * env.px * env.ox + env.dx - CST * z * 0.4;
 	return (pt);
 }
 
