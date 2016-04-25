@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/13 18:39:21 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/25 18:04:24 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_env
 	int		**map;
 	int		sizel;
 	double	mtx[4][4];
+	int		tet;
 	double	ox;
 	double	oy;
 	double	px;
@@ -45,6 +46,7 @@ typedef struct	s_pt
 {
 	int		x;
 	int		y;
+	int		z;
 	int		col;
 }				t_pt;
 

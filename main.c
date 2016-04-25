@@ -6,11 +6,12 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/13 21:03:13 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/25 18:56:18 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "fdf.h"
@@ -35,30 +36,33 @@
 int				main(int argc, char **argv)
 {
 	t_env	env;
+	int		a;
 
 	if (argc == 2)
 	{
+		a = 20;
 		env.sx = 2560;              ////////////////// erase when menu is on
 		env.sy = 1310; /////////////////
-		env.mtx[0][3] = 100;
-		env.mtx[1][3] = 100;
-		env.mtx[2][3] = 100;
-		env.mtx[3][3] = 1;
 		env.mtx[0][0] = 1;
 		env.mtx[0][1] = 0;
-		env.mtx[0][2] = 5;
-		env.mtx[1][0] = 1;
-		env.mtx[1][1] = 0;
-		env.mtx[1][2] = 5;
-		env.mtx[2][0] = 1;
+		env.mtx[0][2] = 0;
+		env.mtx[0][3] = 200;
+		env.mtx[1][0] = 0;
+		env.mtx[1][1] = 1;
+		env.mtx[1][2] = 0;
+		env.mtx[1][3] = 200;
+		env.mtx[2][0] = 0;
 		env.mtx[2][1] = 0;
 		env.mtx[2][2] = 1;
+		env.mtx[2][3] = 0;
 		env.mtx[3][0] = 0;
 		env.mtx[3][1] = 0;
 		env.mtx[3][2] = 0;
-		/*env.px = 1;
-		env.py = 1;
-		env.dx = 100;
+		env.mtx[3][3] = 1;
+		env.tet = 0;
+		env.px = 2;
+		env.py = 2;
+		/*env.dx = 100;
 		env.dy = 100;
 		env.ox = 1;
 		env.oy = 1;*/
