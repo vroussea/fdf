@@ -6,14 +6,12 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/25 18:56:18 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/25 20:47:49 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "fdf.h"
 
 /*

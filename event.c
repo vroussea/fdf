@@ -6,14 +6,13 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/04/25 19:04:00 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/04/25 21:51:05 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h> /////////////////
 
 int	key_hook(int keycode, t_env *env)
 {
@@ -30,14 +29,11 @@ int	key_hook(int keycode, t_env *env)
 	}
 	if (keycode == 40 || keycode == 37)
 	{
-		env->tet += (keycode == 40 ? 90 : -90);
-		env->mtx[1][1] = cos(env->tet);
-		env->mtx[0][1] = -sin(env->tet);
-		env->mtx[1][0] = sin(env->tet);
-		env->mtx[0][0] = cos(env->tet);
-		printf("cos(%d) = %f\n", env->tet, cos(env->tet));
-		printf("sin(%d) = %f\n", env->tet, sin(env->tet));
-		printf("-sin(%d) = %f\n", env->tet, -sin(env->tet));
+		env->tet += (keycode == 40 ? 10 : -10);
+		env->mtx[2][2] = cos(env->tet * 0.0174533);
+		env->mtx[1][2] = sin(env->tet * 0.0174533);
+		env->mtx[2][1] = -sin(env->tet * 0.0174533);
+		env->mtx[1][1] = cos(env->tet * 0.0174533);
 	}
 	if (keycode == 91)
 		env->oy -= 0.1;
@@ -49,16 +45,12 @@ int	key_hook(int keycode, t_env *env)
 		env->ox -= 0.1;
 	if (keycode == 124)
 		env->mtx[0][3] += 20 + (env->px);
-		//env->dx += 20 + (env->px / 2);
 	if (keycode == 123)
 		env->mtx[0][3] -= 20 - (env->px);
-		//env->dx -= 20 - (env->px / 2);
 	if (keycode == 126)
 		env->mtx[1][3] -= 20 - (env->py);
-		//env->dy -= 20 - (env->py / 2);
 	if (keycode == 125)
 		env->mtx[1][3] += 20 + (env->py);
-		//env->dy += 20 + (env->py / 2);
 	if (keycode == 53)
 	{
 		ft_putendl("Programme fermé");
