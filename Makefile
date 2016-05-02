@@ -6,7 +6,7 @@
 #    By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 09:55:27 by vroussea          #+#    #+#              #
-#    Updated: 2016/04/05 22:09:40 by vroussea         ###   ########.fr        #
+#    Updated: 2016/05/02 21:42:48 by vroussea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MKINC =		make -C libft/
 MLX =		-lmlx -framework OpenGL -framework AppKit
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
-SOURCES =	main.c file_reader.c image_draw.c converter.c event.c
+SOURCES =	main.c file_reader.c image_draw.c converter.c event.c rotate.c
 OBJS =		$(SOURCES:.c=.o)
 
 all :		$(NAME)
