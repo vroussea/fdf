@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/02 21:44:13 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/04 23:45:13 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef struct	s_env
 	int		x;
 	int		y;
 	int		z;
-	double	px;
-	double	py;
+	double	zm;
 	int		tx;
 	int		ty;
 	char	*meml;
@@ -55,8 +54,6 @@ void			line(t_pt pt1, t_pt pt2, t_env env);
 int				key_funct(int keycode, t_env *env);
 int				quit_funct();
 int				put_image(int **map, t_env env);
-void			rotate_x(int keycode, t_env env);
-void			rotate_y(int keycode, t_env env);
-void			rotate_z(int keycode, t_env env);
+void			rotate(int keycode, t_env *env);
 
 #endif

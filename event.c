@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/02 21:59:33 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/04 23:45:34 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,23 @@ void	zoom(int keycode, t_env *env)
 {
 	if (keycode == 69 || keycode == 78)
 	{
-		env->px += (keycode == 69 ? 0.2 : -0.2);
-		env->mtx[0][3] += (keycode == 69 ? -20 - (env->px) : 20 + (env->px));
-		env->mtx[1][3] += (keycode == 69 ? -20 - (env->py) : 20 + (env->py));
-		env->px = (env->px <= 0.2 ? 0.2 : env->px);
-		env->py = env->px;
+		env->zm += (keycode == 69 ? 0.2 : -0.2);
+		env->tx += (keycode == 69 ? -20 - (env->zm) : 20 + (env->zm));
+		env->ty += (keycode == 69 ? -20 - (env->zm) : 20 + (env->zm));
+		env->zm = (env->zm <= 0.2 ? 0.2 : env->zm);
 	}
 }
 
 void	translate(int keycode, t_env *env)
 {
 	if (keycode == 124)
-		env->tx += 12 + (env->px);
+		env->tx += 12 + (env->zm);
 	if (keycode == 123)
-		env->tx -= 12 - (env->px);
+		env->tx -= 12 - (env->zm);
 	if (keycode == 126)
-		env->ty -= 12 - (env->py);
+		env->ty -= 12 - (env->zm);
 	if (keycode == 125)
-		env->ty += 12 + (env->py);
+		env->ty += 12 + (env->zm);
 }
 
 int		key_funct(int keycode, t_env *env)
@@ -47,12 +46,7 @@ int		key_funct(int keycode, t_env *env)
 	zoom(keycode, env);
 	translate(keycode, env);
 	ft_putendl("mdrrot");
-	if (keycode == 84 || keycode == 91)
-		rotate_x(keycode, *env);
-	if (keycode == 86 || keycode == 88)
-		rotate_y(keycode, *env);
-	if (keycode == 82 || keycode == 65)
-		rotate_z(keycode, *env);
+	rotate(keycode, env);
 	if (keycode == 53 || keycode == 17)
 		quit_funct();
 	ft_putendl("mdrtor");

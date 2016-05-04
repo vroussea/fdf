@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/02 22:15:00 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/04 23:46:03 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,24 @@ int				main(int argc, char **argv)
 		env.sy = 1310; /////////////////
 		if (!(env.mtx = ft_matrixid(3)))
 			return (0);
-		ft_putendl("matid");
 		env.tx = 200;
 		env.ty = 200;
 		env.x = 0;
 		env.y = 0;
 		env.z = 0;
-		env.px = 2;
-		env.py = 2;
+		env.zm = 2;
 		if (!(env.mlx = mlx_init()))
 			return (0);
-		ft_putendl("mlx init");
 		if (!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")))
 			return (0);
+		if (!(env.img = mlx_new_image(env.mlx, env.sx, env.sy)))
+			return (0);
 		env.map = NULL;
-		ft_putendl("win init");
 		if (!file_reader(argv[1], &(env.map)))
 		{
 			ft_putendl("Error with map file or malloc !");
 			return (0);
 		}
-		ft_putendl("map lu");
 		loop(env);
 	}
 	return (1);

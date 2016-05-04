@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 18:01:29 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/02 22:01:50 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/04 23:45:03 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static t_pt	para(int x, int y, int z, t_env env)
 	pt.x = (double)(env.mtx[0][0] * x + env.mtx[0][1] * y + env.mtx[0][2] * z);
 	pt.y = (double)(env.mtx[1][0] * x + env.mtx[1][1] * y + env.mtx[1][2] * z);
 	pt.z = (double)(env.mtx[2][0] * x + env.mtx[2][1] * y + env.mtx[2][2] * z);
-	pt.x = pt.x * env.px - CST * pt.z / 2 + env.tx;
-	pt.y = pt.y * env.py - CST * pt.z / 4 + env.ty;
+	pt.x = pt.x * env.zm - CST * pt.z / 2 + env.tx;
+	pt.y = pt.y * env.zm - CST * pt.z / 4 + env.ty;
 //	pt.y = y * env.py * env.oy + env.dy - CST * z / 2 * 0.4 - 0.1 * env.px * x;
 //	pt.x = x * env.px * env.ox + env.dx - CST * z * 0.4;
 	return (pt);
@@ -59,13 +59,10 @@ int			put_image(int **map, t_env env)
 	int		i;
 	int		j;
 
-	if (!(env.img = mlx_new_image(env.mlx, env.sx, env.sy)) ||
-		!(env.meml = mlx_get_data_addr(env.img, &bpp, &(env.sizel), &edan))
+	if (!(env.meml = mlx_get_data_addr(env.img, &bpp, &(env.sizel), &edan))
 		|| !(para_caller(map, env)))
 		return (0);
-	ft_putendl("avant affichage");
 	mlx_put_image_to_window(env.mlx, env.win, env.img, 1, 1);
-	ft_putendl("apres affichage");
 	i = 0;
 	while (i < 3)
 	{
@@ -77,6 +74,7 @@ int			put_image(int **map, t_env env)
 		}
 		i++;
 	}
-	mlx_destroy_image(env.mlx, env.img);
+	ft_putstr("strlen : ");
+	ft_bzero(env.meml, env.sizel * env.sy);
 	return (1);
 }
