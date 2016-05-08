@@ -6,24 +6,21 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 16:54:52 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 22:33:18 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
 #include "fdf.h"
-#include <stdio.h>
 
-static int		nb_pty(int **map)
+int		nb_pty(int **map)
 {
 	int	i;
 
 	i = 0;
 	while (map[i] != NULL)
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -52,19 +49,19 @@ int				main(int argc, char **argv)
 		env.sy = 1310; /////////////////
 		nb_x = env.map[0][0];
 		nb_y = nb_pty(env.map);
-		ft_putstr("nb_x : ");
-		ft_putendl(ft_itoa(nb_x));
-		ft_putstr("nb_y : ");
-		ft_putendl(ft_itoa(nb_y));
-		env.zm = (nb_x > 2 * nb_y  ? (env.sx - 400) / nb_x : (env.sy - 400) / nb_y);
+		env.zm = (nb_x > 1.5 * nb_y)  ? env.sx / nb_x : env.sy / nb_y;
+		env.zm = (env.zm < 0.2 ? 0.2: env.zm);
 		if (!(env.mtx = ft_matrixid(3)))
 			return (0);
-		env.tx = 200;
-		env.ty = 200;
-		env.x = 0;
-		env.y = 0;
-		env.z = 0;
-		env.alt = 0.5;
+		env.tx = (env.sx - nb_x * env.zm) * 0.75;
+		env.ty = (env.sy - nb_y * env.zm) * 1.5;
+		env.x = -49;
+		env.y = 3;
+		env.z = 14;
+		//env.x = 0;
+		//env.y = 0;
+		//env.z = 0;
+		env.alt = 0.02;
 		if (!(env.mlx = mlx_init()))
 			return (0);
 		if (!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")))

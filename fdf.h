@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 15:47:35 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 18:25:36 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int				key_funct(int keycode, t_env *env);
 int				quit_funct();
 int				put_image(int **map, t_env env);
 void			rotate(int keycode, t_env *env);
+int				nb_pty(int **map);
 
 #endif

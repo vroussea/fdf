@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 16:40:52 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 22:33:34 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@
 
 static void	zoom(int keycode, t_env *env)
 {
+	int	nb_x;
+	int	nb_y;
+
 	if (keycode == 69 || keycode == 78)
 	{
-		env->zm += (keycode == 69 ? 0.2 : -0.2);
-		env->tx += (keycode == 69 ? -20 - (env->zm) : 20 + (env->zm));
-		env->ty += (keycode == 69 ? -20 - (env->zm) : 20 + (env->zm));
+		nb_x = env->map[0][0];
+		nb_y = nb_pty(env->map);
+		env->zm += (keycode == 69 ? 0.4 : -0.4);
+		if (keycode == 69)
+		{
+			env->tx -= (nb_x * (env->zm + 0.4) - nb_x * env->zm) / 2;
+			env->ty -= (nb_y * (env->zm + 0.4) - nb_y * env->zm) / 2;
+		}
+		else
+		{
+			env->tx += (nb_x * (env->zm + 0.4) - nb_x * env->zm) / 2;
+			env->ty += (nb_y * (env->zm + 0.4) - nb_y * env->zm) / 2;
+		}
 		env->zm = (env->zm <= 0.2 ? 0.2 : env->zm);
 	}
 }
@@ -29,22 +42,13 @@ static void	zoom(int keycode, t_env *env)
 static void	translate(int keycode, t_env *env)
 {
 	if (keycode == 124)
-		env->tx += 12 + (env->zm);
+		env->tx += 25;
 	if (keycode == 123)
-		env->tx -= 12 - (env->zm);
+		env->tx -= 25;
 	if (keycode == 126)
-		env->ty -= 12 - (env->zm);
+		env->ty -= 25;
 	if (keycode == 125)
-		env->ty += 12 + (env->zm);
-}
-
-static void	altitude(int keycode, t_env *env)
-{
-	if (keycode == 116 || keycode == 121)
-	{
-		env->alt += (keycode == 116 ? 0.1 : -0.1);
-		printf("altitude : %2F\n", env->alt);
-	}
+		env->ty += 25;
 }
 
 int			key_funct(int keycode, t_env *env)
@@ -52,10 +56,20 @@ int			key_funct(int keycode, t_env *env)
 	if (keycode == 36 || keycode == 76)
 		if (!(put_image(env->map, *env)))
 			exit(0);
+	if (keycode == 12)
+	{
+		ft_putstr("x : ");
+		ft_putendl(ft_itoa(env->x));
+		ft_putstr("y : ");
+		ft_putendl(ft_itoa(env->y));
+		ft_putstr("z : ");
+		ft_putendl(ft_itoa(env->z));
+	}
 	zoom(keycode, env);
 	translate(keycode, env);
 	rotate(keycode, env);
-	altitude(keycode, env);
+	if (keycode == 116 || keycode == 121)
+		env->alt += (keycode == 116 ? 0.02 : -0.02);
 	if (keycode == 53 || keycode == 17)
 		quit_funct();
 	if (!(put_image(env->map, *env)))
