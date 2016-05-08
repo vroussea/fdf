@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/04 23:45:13 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 15:47:35 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_env
 	int		y;
 	int		z;
 	double	zm;
+	double	alt;
 	int		tx;
 	int		ty;
 	char	*meml;

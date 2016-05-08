@@ -6,15 +6,16 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/04 23:45:34 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 16:40:52 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-void	zoom(int keycode, t_env *env)
+static void	zoom(int keycode, t_env *env)
 {
 	if (keycode == 69 || keycode == 78)
 	{
@@ -25,7 +26,7 @@ void	zoom(int keycode, t_env *env)
 	}
 }
 
-void	translate(int keycode, t_env *env)
+static void	translate(int keycode, t_env *env)
 {
 	if (keycode == 124)
 		env->tx += 12 + (env->zm);
@@ -37,25 +38,32 @@ void	translate(int keycode, t_env *env)
 		env->ty += 12 + (env->zm);
 }
 
-int		key_funct(int keycode, t_env *env)
+static void	altitude(int keycode, t_env *env)
 {
-	ft_putendl("mdr1");
+	if (keycode == 116 || keycode == 121)
+	{
+		env->alt += (keycode == 116 ? 0.1 : -0.1);
+		printf("altitude : %2F\n", env->alt);
+	}
+}
+
+int			key_funct(int keycode, t_env *env)
+{
 	if (keycode == 36 || keycode == 76)
 		if (!(put_image(env->map, *env)))
 			exit(0);
 	zoom(keycode, env);
 	translate(keycode, env);
-	ft_putendl("mdrrot");
 	rotate(keycode, env);
+	altitude(keycode, env);
 	if (keycode == 53 || keycode == 17)
 		quit_funct();
-	ft_putendl("mdrtor");
 	if (!(put_image(env->map, *env)))
 		quit_funct();
 	return (1);
 }
 
-int		quit_funct()
+int			quit_funct(void)
 {
 	ft_putendl("Programme fermé");
 	exit(0);

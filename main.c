@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/04 23:46:03 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/08 16:54:52 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,17 @@
 #include "fdf.h"
 #include <stdio.h>
 
-/*static int		nb_ptx(int **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map[i] != NULL)
-	{
-		j = j + map[i][0];
-		i++;
-	}
-	return (j);
-}
-
 static int		nb_pty(int **map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (map[i] != NULL)
 	{
-		j = j + map[i][0];
 		i++;
 	}
-	return (j);
-}*/
+	return (i);
+}
 
 static void		loop(t_env env)
 {
@@ -55,13 +37,26 @@ static void		loop(t_env env)
 int				main(int argc, char **argv)
 {
 	t_env	env;
-	//int		nb_x;
-	//int		nb_y;
+	int		nb_x;
+	int		nb_y;
 
 	if (argc == 2)
 	{
+		env.map = NULL;
+		if (!file_reader(argv[1], &(env.map)))
+		{
+			ft_putendl("Error with map file or malloc !");
+			return (0);
+		}
 		env.sx = 2560;              ////////////////// erase when menu is on
 		env.sy = 1310; /////////////////
+		nb_x = env.map[0][0];
+		nb_y = nb_pty(env.map);
+		ft_putstr("nb_x : ");
+		ft_putendl(ft_itoa(nb_x));
+		ft_putstr("nb_y : ");
+		ft_putendl(ft_itoa(nb_y));
+		env.zm = (nb_x > 2 * nb_y  ? (env.sx - 400) / nb_x : (env.sy - 400) / nb_y);
 		if (!(env.mtx = ft_matrixid(3)))
 			return (0);
 		env.tx = 200;
@@ -69,19 +64,13 @@ int				main(int argc, char **argv)
 		env.x = 0;
 		env.y = 0;
 		env.z = 0;
-		env.zm = 2;
+		env.alt = 0.5;
 		if (!(env.mlx = mlx_init()))
 			return (0);
 		if (!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")))
 			return (0);
 		if (!(env.img = mlx_new_image(env.mlx, env.sx, env.sy)))
 			return (0);
-		env.map = NULL;
-		if (!file_reader(argv[1], &(env.map)))
-		{
-			ft_putendl("Error with map file or malloc !");
-			return (0);
-		}
 		loop(env);
 	}
 	return (1);
