@@ -18,9 +18,11 @@ static t_pt	para(int x, int y, int z, t_env env)
 {
 	t_pt	pt;
 
-	pt.col = (z > 0 ? 0x006A8A49 : 0x000000FF);
-	pt.col = (z > 0 ? 0x006A8A49 : 0x000000FF);
-	pt.col = (z > 0 ? 0x006A8A49 : 0x000000FF);
+	pt.col = (z > env.color[4] ? 0x00FFFFFF : 0x000000AA);
+	pt.col = (z > env.color[3] ? 0x00331900 : 0x000000AA);
+	pt.col = (z > env.color[2] ? 0x00003300 : 0x000000AA);
+	pt.col = (z > env.color[1] ? 0x00006600 : 0x000000AA);
+	pt.col = (z > env.color[0] ? 0x00FFFF66 : 0x000000AA);
 	z *= env.alt * env.zm;
 	x *= env.zm;
 	y *= env.zm;
