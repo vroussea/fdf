@@ -14,6 +14,31 @@
 #include <stdlib.h>
 #include "fdf.h"
 
+void	color_scaling(t_env *env)
+{
+	int	i;
+	int	j;
+	int	max;
+	
+	i = 0;
+	max = 0;
+	while (env->map[i] != NULL)
+	{
+		j = 1;
+		while (j <= env->map[0][0])
+		{
+			max = (env->map[i][j] > max ? env->map[i][j] : max);
+			j++;
+		}
+		i++:
+	}
+	env->color[0] = max * 3 * 100;
+	env->color[1] = max * 65 * 100;
+	env->color[2] = max * 80 * 100;
+	env->color[3] = max * 95 * 100;
+	env->color[4] = max * 100 * 100;
+}
+
 int		nb_pty(int **map)
 {
 	int	i;
