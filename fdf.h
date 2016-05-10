@@ -24,13 +24,15 @@
 
 typedef struct	s_env
 {
-	int		sx;
-	int		sy;
 	void	*mlx;
 	void	*win;
+	int		sx;
+	int		sy;
+	void	*img;
+	char	*meml;
 	int		**map;
-	int		sizel;
 	double	**mtx;
+	int		sizel;
 	int		x;
 	int		y;
 	int		z;
@@ -38,8 +40,7 @@ typedef struct	s_env
 	double	alt;
 	int		tx;
 	int		ty;
-	char	*meml;
-	void	*img;
+	int		color[5];
 }				t_env;
 
 typedef struct	s_pt
