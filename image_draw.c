@@ -31,49 +31,18 @@ static int			color(t_pt pt1, t_pt pt2, t_pt pt)
 	unsigned char	*p;
 	int				res;
 
-	diff = (pt2.x - pt1.x > pt2.y - pt1.y ?
-			(double)(pt.x) / (double)(pt2.x - pt1.x) :
-			(double)(pt.y) / (double)(pt2.y - pt1.y));
 	if (pt1.col == pt2.col || diff == 0)
 		return (pt2.col);
+	diff = (pt2.x - pt1.x > pt2.y - pt1.y ?
+			(double)(pt.x - pt1.x) / (pt2.x - pt1.x)) :
+			(double)(pt.y - pt1.y) / (pt2.y - pt1.y)));
 	p = (unsigned char *)&res;
 	p1 = (unsigned char *)&pt2.col;
 	p2 = (unsigned char *)&pt1.col;
-	p[0] = (p1[0] < p2[0] ? (p2[0] - p1[0]) * diff : (p1[0] - p2[0]) * diff);
-	p[1] = (p1[3] < p2[1] ? (p2[1] - p1[1]) * diff : (p1[1] - p2[1]) * diff);
-	p[2] = (p1[2] < p2[2] ? (p2[2] - p1[2]) * diff : (p1[2] - p2[2]) * diff);
-	p[3] = (p1[1] < p2[3] ? (p2[3] - p1[3]) * diff : (p1[3] - p2[3]) * diff);
-
-	/*ptr[0] = ((pb[0] - pa[0]) * diff) + (pa[0] < pb[0] ? pb[0] : pa[0]);
-	ptr[1] = ((pb[1] - pa[1]) * diff) + (pa[1] < pb[1] ? pb[1] : pa[1]);
-	ptr[2] = ((pb[2] - pa[2]) * diff) + (pa[2] < pb[2] ? pb[2] : pa[2]);
-	ptr[3] = ((pb[3] - pa[3]) * diff) + (pa[3] < pb[3] ? pb[3] : pa[3]);
-	ft_putnbr(pb[0]);
-	ft_putchar('|');
-	ft_putnbr(pb[1]);
-	ft_putchar('|');
-	ft_putnbr(pb[2]);
-	ft_putchar('|');
-	ft_putnbr(pb[3]);
-	ft_putchar('-');
-	ft_putnbr(pa[0]);
-	ft_putchar('|');
-	ft_putnbr(pa[1]);
-	ft_putchar('|');
-	ft_putnbr(pa[2]);
-	ft_putchar('|');
-	ft_putnbr(pa[3]);
-	ft_putchar('*');
-	ft_putnbr(diff*100);
-	ft_putchar('=');
-	ft_putnbr(ptr[0]);
-	ft_putchar('|');
-	ft_putnbr(ptr[1]);
-	ft_putchar('|');
-	ft_putnbr(ptr[2]);
-	ft_putchar('|');
-	ft_putnbr(ptr[3]);
-	ft_putchar('\n');*/
+	p[0] = (p2[0] + p1[0]) * diff;
+	p[1] = (p2[1] + p1[1]) * diff;
+	p[2] = (p2[2] + p1[2]) * diff;
+	p[3] = (p2[3] + p1[3]) * diff;
 	return (res);
 }
 
