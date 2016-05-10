@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "fdf.h"
 
-void	color_scaling(t_env *env)
+static void	color_scaling(t_env *env)
 {
 	int	i;
 	int	j;
