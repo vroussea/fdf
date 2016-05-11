@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 16:19:20 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 18:25:36 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 21:21:21 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_env
 	double	alt;
 	int		tx;
 	int		ty;
-	int		color[5];
+	int		color[5][2];
 }				t_env;
 
 typedef struct	s_pt

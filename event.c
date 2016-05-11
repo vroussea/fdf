@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 22:33:34 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 20:37:20 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	zoom(int keycode, t_env *env)
 		nb_x = env->map[0][0];
 		nb_y = nb_pty(env->map);
 		env->zm += (keycode == 69 ? 0.4 : -0.4);
-		if (keycode == 69)
+		if (keycode == 69 && env->zm >= 0)
 		{
 			env->tx -= (nb_x * (env->zm + 0.4) - nb_x * env->zm) / 2;
 			env->ty -= (nb_y * (env->zm + 0.4) - nb_y * env->zm) / 2;
 		}
-		else
+		if (keycode == 78 && env->zm >= 0)
 		{
 			env->tx += (nb_x * (env->zm + 0.4) - nb_x * env->zm) / 2;
 			env->ty += (nb_y * (env->zm + 0.4) - nb_y * env->zm) / 2;

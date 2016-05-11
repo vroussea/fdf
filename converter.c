@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 18:01:29 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/08 22:30:57 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 21:22:59 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,32 @@
 #include <mlx.h>
 #include <stdlib.h>
 
+static void	color(int *col, int z, t_env env, int i)
+{
+	if (z > env.color[i][0])
+	{
+		*col = env.color[i][1];
+		if (i < 4)
+			color(col, z, env, (i + 1));
+	}
+}
+
 static t_pt	para(int x, int y, int z, t_env env)
 {
 	t_pt	pt;
 
-	pt.col = (z > env.color[4] ? 0x00FFFFFF : 0x000000AA);
-	pt.col = (z > env.color[3] ? 0x00331900 : 0x000000AA);
-	pt.col = (z > env.color[2] ? 0x00003300 : 0x000000AA);
-	pt.col = (z > env.color[1] ? 0x00006600 : 0x000000AA);
-	pt.col = (z > env.color[0] ? 0x00FFFF66 : 0x000000AA);
+	if (z <= 0)
+		pt.col = 0x000000AA;
+	else
+		color(&(pt.col), z, env, 0);
 	z *= env.alt * env.zm;
 	x *= env.zm;
 	y *= env.zm;
 	pt.x = (double)(env.mtx[0][0] * x + env.mtx[0][1] * y + env.mtx[0][2] * z);
 	pt.y = (double)(env.mtx[1][0] * x + env.mtx[1][1] * y + env.mtx[1][2] * z);
 	pt.z = (double)(env.mtx[2][0] * x + env.mtx[2][1] * y + env.mtx[2][2] * z);
-	pt.x = pt.x - CST * pt.z + env.tx;
-	pt.y = pt.y - CST * pt.z / 2 + env.ty;
+	pt.x = pt.x - (double)(CST * pt.z) + env.tx;
+	pt.y = pt.y - (double)(CST * pt.z / 2) + env.ty;
 	return (pt);
 }
 
