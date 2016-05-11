@@ -6,7 +6,7 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:28:45 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/11 22:05:35 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 22:26:21 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ int			main(int argc, char **argv)
 			!(env.win = mlx_new_window(env.mlx, env.sx, env.sy, "FdF")) ||
 			!(env.img = mlx_new_image(env.mlx, env.sx, env.sy)))
 			return (0);
+		mlx_string_put(env.mlx, env.win, env.sx / 2 - 100, env.sy / 2 - 10,
+				0xFFFFFF, "Ready Player One");
+		mlx_string_put(env.mlx, env.win, env.sx / 2 - 100, env.sy / 2 + 10,
+				0xFFFFFF, "Press Enter To Start");
 		loop(env);
 	}
 	return (1);

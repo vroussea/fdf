@@ -6,13 +6,32 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 18:01:29 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/11 21:22:59 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 22:52:17 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <mlx.h>
 #include <stdlib.h>
+
+static void	text(t_env env)
+{
+	mlx_string_put(env.mlx, env.win, 15, 5, 0xFFBBBB, "Rotations :");
+	mlx_string_put(env.mlx, env.win, 15, 25, 0xFFBBBB, "7 - 9 : Z-axis");
+	mlx_string_put(env.mlx, env.win, 15, 45, 0xFFBBBB, "8 - 5 : X-axis");
+	mlx_string_put(env.mlx, env.win, 15, 65, 0xFFBBBB, "4 - 6 : Y-axis");
+	mlx_string_put(env.mlx, env.win, env.sx - 220, 5, 0xFFBBBB,
+					"Translations :");
+	mlx_string_put(env.mlx, env.win, env.sx - 220, 25, 0xFFBBBB,
+					"up - down : X-axis");
+	mlx_string_put(env.mlx, env.win, env.sx - 220, 45, 0xFFBBBB,
+					"left - right : Y-axis");
+	mlx_string_put(env.mlx, env.win, env.sx - 190, env.sy - 35, 0xFFBBBB,
+					"Escape to quit FdF");
+	mlx_string_put(env.mlx, env.win, 15, env.sy - 75, 0xFFBBBB, "Zoom :");
+	mlx_string_put(env.mlx, env.win, 15, env.sy - 55, 0xFFBBBB, "+ : more");
+	mlx_string_put(env.mlx, env.win, 15, env.sy - 35, 0xFFBBBB, "- : less");
+}
 
 static void	color(int *col, int z, t_env env, int i)
 {
@@ -78,6 +97,7 @@ int			put_image(int **map, t_env env)
 		|| !(para_caller(map, env)))
 		return (0);
 	mlx_put_image_to_window(env.mlx, env.win, env.img, 1, 1);
+	text(env);
 	i = 0;
 	while (i < 3)
 	{

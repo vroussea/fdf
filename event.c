@@ -6,14 +6,13 @@
 /*   By: vroussea <vroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 21:29:56 by vroussea          #+#    #+#             */
-/*   Updated: 2016/05/11 20:37:20 by vroussea         ###   ########.fr       */
+/*   Updated: 2016/05/11 22:44:38 by vroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 static void	zoom(int keycode, t_env *env)
 {
